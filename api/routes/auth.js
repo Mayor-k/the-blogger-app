@@ -2,7 +2,7 @@ const router = require("express").Router();
 const User = require("../models/User");
 const bcrypt = require("bcrypt");
 
-//REGISTER-ROUTE
+//REGISTER
 
 router.post("/register", async (req, res) => {
 	try {
@@ -16,12 +16,13 @@ router.post("/register", async (req, res) => {
 		});
 		const user = await newUser.save();
 		res.status(200).json(user);
+		console.log("User Saved");
 	} catch (err) {
 		res.status(500).json(err);
 	}
 });
 
-//LOGIN-ROUTE
+//LOGIN
 router.post("/login", async (req, res) => {
 	try {
 		const user = await User.findOne({ username: req.body.username });
@@ -32,6 +33,7 @@ router.post("/login", async (req, res) => {
 
 		const { password, ...others } = user._doc;
 		res.status(200).json(others);
+		consoel.log("User Logged In");
 	} catch (err) {
 		res.status(500).json(err);
 	}
